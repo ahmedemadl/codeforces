@@ -1,0 +1,59 @@
+//=====================================================
+// Author      : chat gbt
+// Date        : 2024-07-08 17:39:38
+// Description : Junior Training Sheet V7.0
+// Problem Code: 47B
+// Problem Name: B_Coins
+// Learned     :
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    cin.tie(0)->sync_with_stdio(0);
+    ios::sync_with_stdio(0);
+
+    vector<int> count(3, 0); // Counters for A, B, C respectively
+    string comparisons[3];
+    for (int i = 0; i < 3; ++i) {
+        cin >> comparisons[i];
+    }
+
+    for (string cmp : comparisons) {
+        char x = cmp[0], y = cmp[2], symbol = cmp[1];
+        if (symbol == '>') {
+            if (x == 'A') count[0]++;
+            if (x == 'B') count[1]++;
+            if (x == 'C') count[2]++;
+            if (y == 'A') count[0]--;
+            if (y == 'B') count[1]--;
+            if (y == 'C') count[2]--;
+        } else {
+            if (x == 'A') count[0]--;
+            if (x == 'B') count[1]--;
+            if (x == 'C') count[2]--;
+            if (y == 'A') count[0]++;
+            if (y == 'B') count[1]++;
+            if (y == 'C') count[2]++;
+        }
+    }
+
+    // Pair the counts with their respective coins
+    vector<pair<int, char>> coins = {{count[0], 'A'}, {count[1], 'B'}, {count[2], 'C'}};
+    
+    // Sort based on the counts
+    sort(coins.begin(), coins.end());
+
+    // Check for impossible case
+    if (coins[0].first == coins[1].first || coins[1].first == coins[2].first) {
+        cout << "Impossible" << endl;
+    } else {
+        // Print the coins in increasing order of their weights
+        for (auto coin : coins) {
+            cout << coin.second;
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
