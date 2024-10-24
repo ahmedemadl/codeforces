@@ -1,0 +1,29 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2024-10-24 17:47:27
+    // Description : Junior Training Sheet V7.0
+    // Problem Code: 
+    // Problem Name: A_Sakurako_and_Kosuke
+    // Learned     : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t;
+        cin >> t;
+        while (t--){
+            int n ; 
+            cin >> n;
+            if(n % 2 == 0){
+                cout << "Sakurako";
+            }
+            else{
+                cout << "Kosuke";
+            }
+            cout << endl;
+        }
+        
+        return 0;
+    }
