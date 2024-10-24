@@ -1,0 +1,51 @@
+
+
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2024-10-24 17:47:27
+    // Description : Junior Training Sheet V7.0
+    // Problem Code: 
+    // Problem Name: A_Sakurako_and_Kosuke
+    // Learned     : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t;
+        cin >> t;
+        while (t--){
+            int n;
+            long long sum = 0;
+            cin >> n;
+            int x[n][n];
+            for (int i = 0 ; i < n; i++){
+                for (int j = 0 ; j < n ; j++){
+                    cin >> x[i][j];
+                }
+            }
+            
+            for(int i = 0 ; i < n; i++){// العمود
+                int maxi = INT_MAX;
+                for(int a = i,b = 0 ; a < n; a++, b++){ //  
+                    maxi = min(x[b][a], maxi);
+                }
+                if(maxi < 0){
+                    sum += maxi*-1; 
+                }
+            } 
+            for(int i = 1 ; i < n; i++){// الصف
+                int maxi = INT_MAX;
+                for(int a = i,b = 0 ; a < n; a++, b++){ //  
+                    maxi = min(x[a][b], maxi);
+                }
+                if(maxi < 0){
+                    sum += maxi*-1; 
+                }
+            } 
+            cout << sum << endl;
+        }
+        
+        return 0;
+    }
