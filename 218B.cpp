@@ -15,28 +15,26 @@ int main(){
     int n, m;
     ll min = 0, max = 0;
     cin >> n >> m;
-    int x[m], y[m];
+    vector <int> x(m), y(m);
     for (int i = 0 ; i < m ; i++){
         cin >> x[i];
         y[i] = x[i];
     }
-    sort(x, x + m);
-    sort(y, y + m, greater<int>());
-    int ntemp = n;
-    for(int i = 0 ; i < m ; i++){
-        
-           while(x[i] > 0 && n > 0){
-            min += x[i];
-            x[i]--;
-            n--;
+    
+    for(int i = 0 ; i < n ; i++){
+        sort(x.begin(), x.end());
+            min += x[0];
+            x[0]--; 
+        if(x[0] == 0){
+            x.erase(x.begin());
         }
     }
-    for(int j = 0 ; j < m ; j++){
-
-        while(y[j] > 0 && ntemp > 0){
-            max += y[j];
-            y[j]--;
-            ntemp--;
+    for(int j = 0 ; j < n ; j++){
+        sort(y.begin(), y.end() , greater<int>());
+            max += y[0];
+            y[0]--;
+        if(y[0] == 0){
+            y.erase(y.begin());
         }
     }
     cout << max << " " << min ;
