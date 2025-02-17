@@ -1,27 +1,41 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-02-17 23:48:16
+// Description : Junior Training Sheet V7.0
+// Problem Code: 255B
+// Problem Name: B_Code_Parsing
+// Learned     : easy but the person who wrote the description of the problem should go to jail
+//=====================================================
 #include <bits/stdc++.h>
 using namespace std;
+#define ll long long
 
-int main() {
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
-    
-    stack<char> st;
-    for (char c : s) {
-        if (!st.empty() && st.top() == 'x' && c == 'y') {
-            st.pop();  // Remove "xy" pair
-        } else {
-            st.push(c);
+    int x=0, y=0;
+    for(char c : s ){
+        if(c == 'x'){
+            x++;
+        }
+        else{
+            y++;
         }
     }
-    
-    string result;
-    while (!st.empty()) {
-        result += st.top();
-        st.pop();
+    char a;
+    if(x > y){
+        a = 'x';
     }
-    
-    reverse(result.begin(), result.end()); // Stack reverses order
-    cout << result << '\n';
-    
+    else{
+        a = 'y';
+    }
+    int length = abs(x - y);
+    string ans="";
+    for(int i = 0 ; i < length ; i++){
+        ans+= a;
+    }
+
+    cout << ans;
     return 0;
 }
