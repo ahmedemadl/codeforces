@@ -4,7 +4,7 @@
 // Description : Junior Training Sheet V7.0
 // Problem Code: 75A
 // Problem Name: A_Life_Without_Zeros
-// Learned     : 
+// Learned     : No Creativity in this code
 //=====================================================
 #include <bits/stdc++.h>
 using namespace std;
@@ -12,24 +12,39 @@ using namespace std;
 
 int main(){
     cin.tie(0)->sync_with_stdio(0);
-    string a, b;
+    int a, b;
     cin >> a >> b;
-    for(int i = 0 ; i < a.length(); i++){
-       if(a[i] == '0' && b[i] != '0'){
-        cout << "NO";
-        return 0;
-       }
-       else if (b[i] == '0' && a[i] != '0'){
-        cout << "NO";
-        return 0;
-       }
-       int x = a[i] - '0';
-       int y = b[i] - '0';
-       if((x + y) > 9){
-        cout << "NO";
-        return 0;
+    ll sum1 = a + b;
+    string x = to_string(a);
+    string y = to_string(b);
+    string first_num = to_string(sum1);
+
+    for(int i = 0 ; i < first_num.length(); i++){
+       if(first_num[i] == '0'){
+        first_num.erase(i,1);
+        i--;
        }
     }
-    cout << "YES";
+
+    for(int i = 0 ; i < x.length(); i++){
+        if(x[i] == '0'){
+            x.erase(i,1);
+            i--;
+           }
+    }
+
+    for(int i = 0 ; i < y.length(); i++){
+        if(y[i] == '0'){
+            y.erase(i,1);
+            i--; // small but impactable mistake to forget this operation 
+           }
+    }
+
+    int c = stoi(x);
+    int d = stoi(y);
+    ll first = stoll(first_num);
+    ll second = c + d;
+    
+    cout << ((second != first) ? "NO" : "YES");
     return 0;
 }
