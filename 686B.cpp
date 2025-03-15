@@ -1,22 +1,28 @@
-    #include<bits/stdc++.h>
-    using namespace std;
-    int main() {
-    	int n;
-    	cin >> n;
-    	long long arr[n];
-    	for (int i = 0; i < n; i++) {
-    		cin >> arr[i];
-    	}
-    	int i = 0;
-    	while (i < n - 1) {
-    		if (arr[i] > arr[i + 1]) {
-    		    long long x=arr[i],y=arr[i+1];
-    			arr[i]=y;
-    			arr[i+1]=x;
-    			cout << i + 1 <<" "<< i + 2 << "\n";
-    		    i=0;
-    		}
-            i++;
-    	}
-    	return 0;
-    }
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-03-15 23:05:38
+// Description : Junior Training Sheet V7.0
+// Problem Code: 686B
+// Problem Name: B_Little_Robber_Girl_s_Zoo
+// Learned     : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int n;
+    cin >> n;
+	vector <int> a(n);
+	for (int& i : a) cin >> i;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j + 1 < n; j++) {
+			if (a[j] > a[j + 1]) {
+				swap(a[j], a[j + 1]);
+				cout << j + 1 << " " << j + 2 << "\n";
+			}
+		}
+	}
+    return 0;
+}
