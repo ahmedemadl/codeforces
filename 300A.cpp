@@ -1,53 +1,60 @@
-//=====================================================
-// Author      : ahmedgbr367
-// Date        : 2025-01-28 21:54:08
-// Description : Junior Training Sheet V7.0
-// Problem Code: 300A
-// Problem Name: A_Array
-// Learned     : 
-//=====================================================
 #include <bits/stdc++.h>
 using namespace std;
-#define ll long long
 
-int main(){
-    cin.tie(0)->sync_with_stdio(0);
-
+int main() {
     int n;
     cin >> n;
-    vector<ll> arr(n), third , first , second;
+    
+    vector<int> negatives, positives, zeroes;
+    
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        if (x < 0) 
+            negatives.push_back(x);
+        else if (x > 0) 
+            positives.push_back(x);
+        else 
+            zeroes.push_back(x);
+    }
 
-    for (int i = 0; i < n; ++i) {
-        cin >> arr[i];
+    // First set: must contain a negative product (at least one negative number)
+    vector<int> set1, set2, set3;
+    set1.push_back(negatives.back());
+    negatives.pop_back();
+    
+    // If there are no positive numbers, move two negatives to set2 to make a positive product
+    if (positives.empty()) {
+        set2.push_back(negatives.back());
+        negatives.pop_back();
+        set2.push_back(negatives.back());
+        negatives.pop_back();
+    } else {
+        // Otherwise, move all positive numbers to set2
+        set2 = positives;
     }
-    bool check = 1;
-    for (int i = 0 ; i < n ; i++){
-        
-        if(arr[i] <= 0){
-            if( check == 1 && arr[i] < 0){
-            second.push_back(arr[i]);
-            check =0;
-            }
-            else{
-                    third.push_back(arr[i]);
-            }
-        }
-        else{
-            first.push_back(arr[i]);
-        }
+
+    // Third set: must contain zero product, put all zeroes there
+    set3 = zeroes;
+
+    // Put remaining negatives in set3
+    while (!negatives.empty()) {
+        set3.push_back(negatives.back());
+        negatives.pop_back();
     }
-    cout << second.size()<< " ";
-    for(auto i : second){
-        cout << i << " ";
-    }
-    cout << endl << first.size()<< " ";
-    for(auto i : first){
-        cout << i << " ";
-    }
-    cout << endl << third.size() << " ";
-    for(auto i : third){
-        cout << i << " ";
-    }
+
+    // Print the sets
+    cout << set1.size() << " ";
+    for (int num : set1) cout << num << " ";
+    cout << endl;
+
+    cout << set2.size() << " ";
+    for (int num : set2) cout << num << " ";
+    cout << endl;
+
+    cout << set3.size() << " ";
+    for (int num : set3) cout << num << " ";
+    cout << endl;
 
     return 0;
 }
