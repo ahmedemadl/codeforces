@@ -1,43 +1,51 @@
-//=====================================================
-// Author      : ahmedgbr367
-// Date        : 2025-02-01 23:44:38
-// Description : Junior Training Sheet V7.0
-// Problem Code: 629A
-// Problem Name: A_Far_Relative_s_Birthday_Cake
-// Learned     : 
-//=====================================================
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
+
 using namespace std;
-#define ll long long
 
-int main(){
-    cin.tie(0)->sync_with_stdio(0);
-
+int main() {
     int n;
     cin >> n;
-    vector<string> cake(n);
+    vector<string> grid(n);
     for (int i = 0; i < n; ++i) {
-        cin >> cake[i];
+        cin >> grid[i];
     }
 
-    int row_pairs = 0, col_pairs = 0;
+    // Initialize counters for rows and columns
+    vector<int> row_counts(n, 0);
+    vector<int> col_counts(n, 0);
 
+    // Count the number of 'C's in each row and column
     for (int i = 0; i < n; ++i) {
-        int row_count = count(cake[i].begin(), cake[i].end(), 'C');
-        row_pairs += row_count * (row_count - 1) / 2;
-    }
-
-    for (int j = 0; j < n; ++j) {
-        int col_count = 0;
-        for (int i = 0; i < n; ++i) {
-            if (cake[i][j] == 'C') {
-                col_count++;
+        for (int j = 0; j < n; ++j) {
+            if (grid[i][j] == 'C') {
+                row_counts[i]++;
+                col_counts[j]++;
             }
         }
-        col_pairs += col_count * (col_count - 1) / 2;
     }
 
-    cout << row_pairs + col_pairs << endl;
+    // Calculate the number of pairs in rows
+    int row_pairs = 0;
+    for (int count : row_counts) {
+        if (count >= 2) {
+            row_pairs += count * (count - 1) / 2;
+        }
+    }
+
+    // Calculate the number of pairs in columns
+    int col_pairs = 0;
+    for (int count : col_counts) {
+        if (count >= 2) {
+            col_pairs += count * (count - 1) / 2;
+        }
+    }
+
+    // Total happiness is the sum of row_pairs and col_pairs
+    int total_happiness = row_pairs + col_pairs;
+
+    cout << total_happiness << endl;
 
     return 0;
 }
