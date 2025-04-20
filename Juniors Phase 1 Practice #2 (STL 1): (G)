@@ -1,0 +1,53 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-04-20 10:22:02
+// Description : Juniors Phase 1 Practice #2 (STL 1)
+// Problem Code: https://codeforces.com/group/3nQaj5GMG5/contest/373244/problem/G
+// Problem Name: G_Brackets_Hard_Version
+// Learned     : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    string s;
+    cin >> s;
+    stack<char>st;
+    for(auto it:s){
+        if(it == '(' || it == '{' || it == '['){
+            st.push(it);
+        }
+        else{
+            if(st.empty()){
+                cout << "no";
+                return 0;
+            }
+            else{
+                if(it == ')' && st.top() == '('){
+                st.pop();
+                }
+                else if (it == '}' && st.top() == '{'){
+                    st.pop();
+                }
+                else if (it == ']' && st.top() == '['){
+                    st.pop();
+                }
+                else{
+                    cout <<"no";
+                    return 0;
+                }
+            }
+        }
+    }
+    if(st.empty()){
+        cout << "yes";
+        return 0;
+    }
+    else{
+        cout <<"no";
+        return 0;
+    }
+    return 0;
+}
