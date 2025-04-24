@@ -1,0 +1,31 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-04-24 21:46:11
+// Description : https://codeforces.com/group/wNS3GwuHOE/contest/435607/problem/D
+// Problem Code: 
+// Problem Name: D_Range_sum_query
+// Learned     : prefix_sum
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    ll n, t, num;
+    cin >> n >> t;
+    ll prefix_sum[n+1]={};
+    for(int i = 1 ; i <= n ; i++){
+        cin >> num;
+        prefix_sum[i]= prefix_sum[i-1]+num;
+    }
+    
+    ll a, b, ans;
+
+    for(int i = 0 ; i < t ; i++){
+        cin >> a >> b;
+        ans= prefix_sum[b]-prefix_sum[a-1];
+        cout << ans << '\n';
+    }
+    return 0;
+}
