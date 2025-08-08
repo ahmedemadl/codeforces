@@ -1,0 +1,39 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-08-08 22:27:25
+// Description : Junior Training Sheet V7.0
+// Problem Code: 1669B
+// Problem Name: B_Triple
+// Learned     : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n; cin >> n;
+        bool flag = 0;
+        int arr[n+1]= {0};
+        for(int i = 0 ; i < n; i ++){
+            int num;
+            cin >> num;
+            arr[num]++;
+        }
+        for(int i = 1 ; i <= n; i ++){
+            if(arr[i] >= 3){
+                cout << i << '\n';
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 0){
+            cout << "-1" << '\n';            
+        }        
+        
+    }
+
+    return 0;
+}
