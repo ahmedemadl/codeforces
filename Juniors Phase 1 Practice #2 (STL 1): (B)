@@ -1,0 +1,30 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-09-06 22:49:08
+// Description : ICPC Assiut University Training - Juniors Phase 1 Sheets-2022
+// Problem Name: B_Tickets
+// Learned     : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int n; cin >> n;
+    queue<int> q;
+    for(int i = 0 ; i < n ; i ++){
+        int op, num; cin >> op>> num;
+        if(op == 1) q.push(num);
+        else{
+            if(q.front() == num) cout << "Yes" << '\n';
+            else{
+                cout << "No" << '\n';
+            }
+            q.pop();
+        }
+
+    }
+
+    return 0;
+}
