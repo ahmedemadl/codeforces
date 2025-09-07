@@ -1,0 +1,24 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-09-07 17:43:59
+// Problem Code: 2137A
+// Problem Name: A_Collatz_Conjecture
+// Learned     : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int n; cin >> n;
+    while(n--){
+        ll x, k ; cin >> k >> x;
+        while(k--){
+            x*= 2;
+        }
+        cout << x << '\n';
+    }
+
+    return 0;
+}
