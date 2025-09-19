@@ -1,0 +1,34 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-09-19 23:50:09
+// Description : Junior Training Sheet V7.0
+// Problem Code: 1702A
+// Problem Name: A_Round_Down_the_Price
+// Learned     : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int n; cin >> n;
+    while(n--){
+        string s; 
+        cin >>s ;
+        if(s == "1"){
+            cout << 0 << endl;
+        }else{
+        int num = s[0] - '0';
+        if(num > 1){
+            cout << num -1;
+        }
+        for(int i = 1 ; i < s.size(); i++){
+            cout <<s[i];
+        }
+        cout << endl;
+        }
+    }
+
+    return 0;
+}
