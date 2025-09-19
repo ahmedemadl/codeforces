@@ -14,20 +14,17 @@ int main(){
     cin.tie(0)->sync_with_stdio(0);
     int n; cin >> n;
     while(n--){
-        string s; 
-        cin >>s ;
-        if(s == "1"){
-            cout << 0 << endl;
-        }else{
-        int num = s[0] - '0';
-        if(num > 1){
-            cout << num -1;
+        int num; cin >> num;
+        int tem = num;
+        int size = 0;
+        while(tem > 0){
+            tem/=10;
+            size ++;
         }
-        for(int i = 1 ; i < s.size(); i++){
-            cout <<s[i];
-        }
-        cout << endl;
-        }
+        size --;
+        int ans = num - pow(10,size);
+        cout << ans << '\n';
+
     }
 
     return 0;
