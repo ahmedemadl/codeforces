@@ -1,0 +1,105 @@
+//=====================================================
+// Date        : 2025-09-18 21:26:40
+// Problem Name: K_Stars_Drawing_Easy_Edition
+// Learned     : vector of pair of pair of integer
+// يارب رب سترك و عفوك و رضاك و الحل ده يطلع صح
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+char arr[101][101];
+vector<pair<pair<int, int>, int> > res;
+int n, m;
+int visit[101][101]={0};
+void visit_function(int row, int column, int stars){
+    for(int i = row ; i <= row + stars; i ++){// ماشي على العمود لفوق
+        visit[i][column]= 1;    
+    }
+    for(int i = row ; i >= row-stars; i --){ // ماشي على العمود لتحت
+        visit[i][column]= 1;
+    }
+    for(int i = column ; i <= column + stars; i ++){// ماشي على الصف يمين
+        visit[row][i]= 1;
+    }
+    for(int i = column ; i >= column-stars; i --){//  ماشي الصف شمال
+        visit[row][i]= 1;
+    }    
+}
+int checkStarts(int row, int column){
+    int mini= INT_MAX;
+    int count = 0;
+    for(int i= column-1; i >= 1 ; i--){ // ماشي شمال
+        if(arr[row][i] != '*'){
+            break;
+        }
+        count ++;
+    }
+    mini = min(mini, count);
+    count = 0;
+    for(int i= column+1; i <= m ; i ++){ //  ماشي يمين
+        if(arr[row][i] != '*'){
+            break;
+        }
+        count ++;
+    }
+    mini = min(mini, count);
+    count = 0;
+    for(int i= row-1; i >= 1 ; i --){// ماشي فوق
+        if(arr[i][column] != '*'){
+            break;
+        }
+        count ++;
+    }        
+    mini = min(mini, count);
+    count = 0;
+    for(int i= row+1; i <= n ; i ++){ // ماشي تحت
+        if(arr[i][column] != '*'){
+            break;
+        }
+        count ++;
+    }
+    mini = min(mini, count);
+    return mini;
+}
+
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    cin >> n >> m;
+    for(int i = 1 ; i <= n; i++){
+        for(int j = 1 ; j <= m ; j ++){
+            arr[i][j] ='.';
+        }
+    }
+    for(int i = 1 ; i <= n; i++){
+        for(int j = 1 ; j <= m ; j ++){
+            cin >>arr[i][j];
+        }
+    }
+    for(int i = 1 ; i <= n; i++){
+        for(int j = 1 ; j <= m ; j ++){
+            if(arr[i][j] == '*'){
+                int stars = checkStarts(i,j);
+                
+                if(stars > 0){
+                    visit_function(i, j, stars);  
+                    res.push_back({{i,j}, stars}); 
+                }
+            }
+        }
+    }
+    for(int i = 1; i <= n; i ++){
+        for(int j = 1 ; j <= m ; j++){
+            if(arr[i][j] == '*' && visit[i][j] == 0){
+                    cout << "-1"; return 0;
+            }
+        }
+    }
+        cout << res.size() << endl;
+        for(int i = 0 ; i < res.size() ; i++){
+            cout <<res[i].first.first << " "<< res[i].first.second << " " << res[i].second << '\n';
+        }        
+
+    return 0;
+}
