@@ -1,0 +1,45 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-09-23 10:56:13
+// Problem Name: C_Chemistry
+// Learned     : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >>t;
+    while(t--){
+        int n, k; cin >> n >> k;
+        string s; cin >> s;
+        int freq[26] ={0};
+        for(int i =0 ; i < n ; i++){
+            int num = s[i] - 'a';
+            freq[num]++;
+        }
+        int num_odd=0, num_even=0;
+        for(int i =0 ; i < 26 ; i++){
+            if(freq[i] > 0){
+                if(freq[i] % 2 == 0){
+                    num_even++;
+                }else{
+                    num_odd++;
+                }
+            }
+        }
+
+        if(k < num_odd-1){
+            cout << "NO" << '\n';
+        }
+        else if(k == num_odd-1 || k == num_odd){
+            cout << "YES" << '\n';
+        }else{
+            cout << "YES" << '\n';
+        }
+        
+    }
+
+    return 0;
+}
