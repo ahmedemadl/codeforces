@@ -1,0 +1,34 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-09-23 13:30:50
+    // Problem Name: L_Don_t_Try_to_Count
+    // Learned     : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t; cin >> t; 
+        while(t--){
+            int n, m; cin >> n >> m;
+            string x, s; cin >> x >> s;
+            int ans=0;
+            while(true){
+                if(x.find(s) != -1){
+                    break;
+                }
+                if(ans != 0 && x.size() > m*2){
+                    ans =-1;
+                    break;
+                }
+                ans ++;
+                x+=x;
+            }
+            cout << ans << '\n';
+     
+        }
+     
+        return 0;
+    }
