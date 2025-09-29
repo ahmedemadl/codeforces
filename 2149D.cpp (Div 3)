@@ -1,0 +1,72 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-09-26 17:12:12
+// Problem Name: D_A_and_B
+// Learned     : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n; cin>> n;
+        string s; cin >> s;
+
+        vector<int> av, bv;
+        for(int i = 0 ; i < n; i ++){
+            if(s[i] == 'a'){
+                av.push_back(i);
+            }
+            else{
+                bv.push_back(i);
+            } 
+        }
+        ll a_moves = 0, b_moves = 0;
+
+        if(!av.empty()){
+            int a_mid_ind = (av.size() / 2);
+            int mid_a = av[a_mid_ind];
+            int high_diff = 0, low_diff = 0;
+            for(int i = 0 ; i < av.size() ; i++){
+                if(mid_a != av[i]){
+                    if(av[i] > mid_a){
+                        a_moves +=  av[i] - mid_a - 1 - high_diff;
+                        high_diff++;
+                    }else{
+                        a_moves +=  mid_a - av[i] - 1 - low_diff;
+                        low_diff++;
+                    }
+    
+                }
+            }
+        }
+
+
+        if(!bv.empty()){
+            int b_mid_ind = (bv.size() /2);
+            int mid_b = bv[b_mid_ind];
+            int high_diff = 0, low_diff = 0;
+            for(int i = 0 ; i < bv.size() ; i++){
+                if(mid_b != bv[i]){
+                    if(bv[i] > mid_b){
+                        b_moves +=  bv[i] - mid_b - 1 - high_diff;
+                        high_diff++;
+                    }else{
+                        b_moves +=  mid_b - bv[i] - 1 - low_diff;
+                        low_diff++;
+                    }
+    
+                }
+            }    
+        }
+
+        ll ans = min(a_moves, b_moves);
+
+        cout << ans << '\n';
+    }
+
+    return 0;
+}
