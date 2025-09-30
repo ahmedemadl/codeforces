@@ -1,0 +1,32 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-09-26 16:52:17
+    // Problem Name: C_MEX_rose
+    // Learned     : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t; cin >> t;
+        while(t--){
+            int n, k; cin >> n >> k;
+            int k_freq = 0;
+            set<int> st;      
+            for(int i = 0 ; i < n;i++){
+                int num;cin >> num;
+                if(num == k){
+                    k_freq ++;
+                }else if ( num < k){
+                    st.insert(num);
+                }
+            }
+            int d = k - st.size();
+            int ans = max(k_freq,d);
+            cout << ans << '\n';
+        }
+     
+        return 0;
+    }
