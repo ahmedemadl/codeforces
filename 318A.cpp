@@ -1,21 +1,20 @@
-#include <iostream>
-using namespace std;
-
-int main() {
-    long long n, k;
-    cin >> n >> k;
-    
-    // Calculate the middle point (number of odd elements)
-    long long mid = (n + 1) / 2;
-
-    // Determine the k-th element
-    if (k <= mid) {
-        // The k-th element is in the odd numbers
-        cout << 2 * k - 1 << endl;
-    } else {
-        // The k-th element is in the even numbers
-        cout << 2 * (k - mid) << endl;
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-10-07 19:52:10
+    // Problem Name: A_Even_Odds
+    // Note        : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        ll n,k;cin >> n >> k;
+        if(k <= (n+1)/2){
+            cout << (k*2)-1;
+        }else{
+            cout << (k-((n+1)/2))*2;
+        }
+        return 0;
     }
-
-    return 0;
-}
