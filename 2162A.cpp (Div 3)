@@ -1,0 +1,27 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-10-17 17:35:55
+    // Problem Name: A_Beautiful_Average
+    // Note        : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t; cin >> t;
+        while(t--){
+            int  n;cin >>n;
+            int arr[n];
+            int ans =0;
+            for(int i = 0; i < n;i++){
+                int num; cin >> num;
+                ans = max(num,ans);
+            }
+     
+            cout << ans << '\n';
+     
+        }
+        return 0;
+    }
