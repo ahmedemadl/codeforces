@@ -1,0 +1,45 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-10-18 21:55:28
+// Problem Name: E_Beautiful_Palindromes
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n, k; cin>> n >> k;
+        int freq[n+1]= {0};
+        int arr[n];
+        vector<int> v_org;
+        for(int i = 0 ; i < n ; i++){
+            int num; cin >> num;
+            if(freq[num] == 0){
+                v_org.push_back(num);
+                freq[num] =1;
+            }
+        }
+        vector<int>v_rem;
+        for(int i = 1 ; i <= n ; i++){
+            if(freq[i] == 0){
+                v_rem.push_back(i);
+            }
+        }
+        while(k--){
+            if(!v_rem.empty()){
+                v_org.push_back(v_rem.back());
+                cout << v_rem.back() <<" ";
+                v_rem.pop_back();
+            }else{
+                cout << v_org[v_org.size() -3] << " ";
+                v_org.push_back(v_org[v_org.size()-3]);
+            }
+        }
+        cout << '\n';
+    }
+    return 0;
+}
