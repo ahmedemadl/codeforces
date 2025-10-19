@@ -1,0 +1,28 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-10-17 18:02:48
+    // Problem Name: C_Beautiful_XOR
+    // Note        : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t; cin >> t;
+        while(t--){
+            int a,b; cin >> a >>b;
+            int ans = a^b;
+            int x = floor(log2(a));
+            int y = floor(log2(b));
+            int anspow = floor(log2(ans));
+            int first= pow(2,anspow);
+            int second = ans - first;
+            if(x < y)cout <<  "-1" << '\n';
+            else if(a == b) cout << "0" << '\n';
+            else cout << "2" << '\n' << second << " " << first << '\n';
+     
+        }
+        return 0;
+    }
