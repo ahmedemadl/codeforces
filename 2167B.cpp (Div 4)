@@ -1,0 +1,24 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-10-28 17:38:43
+    // Problem Name: B_Your_Name
+    // Note        : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t; cin >> t;
+        while(t--){
+            int n;cin >> n;
+            string s,t;cin >> s>> t;
+            sort(s.begin(), s.end());
+            sort(t.begin(), t.end());
+            if(s == t) cout << "YES" << '\n';
+            else cout << "NO" << '\n';
+     
+        }
+        return 0;
+    }
