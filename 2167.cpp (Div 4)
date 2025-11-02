@@ -1,0 +1,36 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-10-28 17:46:06
+    // Problem Name: C_Isamatdin_and_His_Magic_Wand
+    // Note        : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t; cin >> t;
+        while(t--){
+            int odds=0, evens =0;
+            int n;cin >> n ;
+            int arr[n];
+            for(int i = 0 ; i < n; i++){
+                cin >> arr[i];
+                if(arr[i] % 2 ==0){
+                    evens ++;
+                }else{
+                    odds++;
+                }
+            }
+            if(evens > 0 && odds > 0){
+                sort(arr,arr+n);
+            }
+        
+            for(int i = 0 ;i < n ;i++){
+                cout << arr[i] << " ";
+            } 
+            cout << '\n';;
+        }
+        return 0;
+    }
