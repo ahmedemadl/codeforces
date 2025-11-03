@@ -1,0 +1,49 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-10-28 18:00:57
+    // Problem Name: D_Yet_Another_Array_Problem
+    // Note        : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+    	ll not_prime[1000001]={0};
+    	
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        not_prime[0] = 1;
+    	not_prime[1] = 1;    
+    	// Sieve of Eratosthenes O(n log(long(n)))
+    	for(int i = 2; i * i < 1000001 ; i++){
+    	    if(!not_prime[i]){
+    	        for(int j = i*i ; j < 1000001; j+=i){
+    	            not_prime[j] = 1;
+    	        }
+            }
+        }
+        int t; cin >> t;
+        while(t--){
+            ll n;cin >> n;
+            ll arr[n];
+            bool one_odd=0;
+            for(int i = 0 ; i < n; i++){
+                cin >> arr[i];
+            }
+            bool flag=1;
+            int ans=-1;
+            for(int j = 2; j < 1000001; j++){
+                if(not_prime[j] == 1) continue;
+                for(int i = 0; i < n; i++){
+                    if(arr[i] % j != 0){
+                        ans = j;
+                        flag=0;
+                        break;
+                    }
+                }
+                if(!flag)break;
+            }
+            cout << ans << '\n';
+     
+        }
+        return 0;
+    }
