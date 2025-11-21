@@ -1,0 +1,84 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-11-21 16:32:42
+    // Problem Name: B_Farmer_John_s_Card_Game
+    // Note        : the idea of N in general medium in Assuit sheet
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t; cin >> t;
+        while(t--){
+            int n, m; cin >> n >> m;
+            vector<vector<int>> v(n , vector<int> (m));
+            vector<int> sorted(m);
+            for(int i = 0 ; i < n; i++){
+                for(int j = 0 ; j < m ; j ++){
+                    cin >> sorted[j];
+     
+                }
+                sort(sorted.begin(), sorted.end());
+                for(int j = 0 ; j < m ; j ++){
+                    v[i][j]= sorted[j];
+                }
+            }
+            /*
+            1
+            0
+            3
+            2
+            0 -> n-1
+            */
+            vector<int> order(n); // each index represent the order
+            bool valid = 1;
+            int a=0;
+            for(int i  = 0; i < n ;i ++){
+                for(int j = 0 ; j < n ; j ++){
+                    if(v[j][0] == a){
+                        order[i] = j;
+                        a++;
+                        break;
+                    }
+                    if(j == n-1){
+                        valid = 0;
+                        break;
+                    }
+                }
+     
+                // if(v[i][0] > n-1){
+                //     valid = 0;
+                //     break;
+                // }else{
+                //     order[i]= i;
+                // } 
+            }
+            if(!valid){
+                cout << -1 << '\n';
+                continue;
+            }
+            int k = 0;
+            for(int j = 0 ; j < m ; j ++){
+                for(int i = 0 ;i < n ; i ++){
+                    if(v[order[i]][j] != k){
+                        valid =0;
+                        break;
+                    }
+                    k++;
+                    
+                }
+            }
+            if(!valid){
+                cout << -1 << '\n';
+                continue;
+            }
+            for(int i = 0 ; i < n; i++){
+                cout << order[i] +1<< " ";
+            }
+            cout << '\n';
+     
+        }   
+        return 0;
+    }
