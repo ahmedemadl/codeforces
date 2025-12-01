@@ -1,0 +1,33 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-12-01 02:16:26
+    // Problem Name: C_Update_Queries
+    // Note        : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t; cin >> t;
+        while(t--){
+            int n, m; cin >> n >> m;// n is the s.size , m numbers
+            string s; cin >> s;
+            set<int> st;
+            for(int i = 0;i < m; i++){
+                int num;cin >> num;
+                st.insert(num);
+            }
+            string b;cin >> b;
+            int a = 0;
+            sort(b.begin(), b.end());
+            for(auto i : st){
+                s[i -1]= b[a];
+                a++;
+            }
+            cout << s << '\n';
+     
+        }
+        return 0;
+    }
