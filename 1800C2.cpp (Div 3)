@@ -1,0 +1,32 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-12-08 05:40:41
+    // Problem Name: C_2_Powering_the_Hero_hard_version
+    // Note        : 
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t; cin >> t;
+        while(t--){
+            int n; cin >> n;
+            priority_queue<ll> pq;
+            ll power = 0;
+            for(int i = 0 ; i < n; i++){
+                ll num;cin >> num;
+                if(num > 0){
+                    pq.push(num);
+                }else{
+                    if(!pq.empty()){
+                        power+= pq.top();
+                        pq.pop();
+                    }
+                }
+            }
+            cout << power << '\n';
+        }
+        return 0;
+    }
