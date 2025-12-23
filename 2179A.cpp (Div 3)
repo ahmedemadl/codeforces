@@ -1,0 +1,20 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-12-23 17:03:08
+// Problem Name: A_Blackslex_and_Password
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int x, k ; cin >> x >> k;
+        cout << x * k +1 << '\n';
+
+    }
+    return 0;
+}
