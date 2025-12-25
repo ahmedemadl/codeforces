@@ -1,0 +1,27 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-12-25 02:58:43
+    // Problem Name: D_Same_Differences
+    // Note        : I so proud if it's correct
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+        cin.tie(0)->sync_with_stdio(0);
+        int t; cin >> t;
+        while(t--){
+            ll n;cin >> n;
+            map<int,int> mp;
+            ll ans = 0;
+            for(ll i = 1 ;i <= n;i++){
+                ll num;cin >> num;
+                ans+=mp[num-i];
+                mp[num-i]++;
+            }
+            cout << ans << '\n';
+     
+        }
+        return 0;
+    }
