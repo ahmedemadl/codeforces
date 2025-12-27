@@ -1,0 +1,44 @@
+    //=====================================================
+    // Author      : ahmedgbr367
+    // Date        : 2025-12-25 17:13:24
+    // Problem Name: A_Knight_Tournament
+    // Note        : credit => GM Halzion
+    //=====================================================
+    #include <bits/stdc++.h>
+    using namespace std;
+    #define ll long long
+     
+    int main(){
+    	cin.tie(0)->sync_with_stdio(0);
+     
+        int n, m;cin >> n >> m;
+        set<int> alive;
+        vector<int> v(n,-1);
+        for(int i = 0; i < n ;i ++){
+            alive.insert(i);
+        }
+        for(int i = 0 ;i < m;i++){
+            int l, r, x;cin >> l >> r >> x;
+            r--;
+            l--;
+            x--;
+            // convert to zero based
+            // سبحانه 
+            auto it = alive.lower_bound(l); // this return a pointer i think
+            while(it != alive.end() && *it <= r){
+                if(*it == x){
+                    it++;
+                }else{
+                    v[*it] =x;
+                    it = alive.erase(it);
+                }
+            }
+        }
+        for(auto &u : v){
+            cout << u+1 << " ";
+        }
+        // for(int i =0 ; i < n ; i++){
+        //     cout << v[i]+1 << " ";
+        // }    
+        return 0;
+    }
