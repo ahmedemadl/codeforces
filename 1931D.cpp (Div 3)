@@ -1,0 +1,35 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-12-26 21:14:43
+// Problem Name: D_Divisible_Pairs
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        ll n, x, y;cin >> n >> x >> y;
+        vector<ll> v(n);
+        map<pair<ll,ll>,ll>mp;
+        for(int i= 0 ;i < n;i++){
+            int a;cin >> a;
+            v[i]=a;
+
+        }
+        ll count=0;
+        for(ll i = 0 ;i < n;i++){
+           ll f = v[i]%x, s = v[i]%y;
+           if(mp.count({f,s})){
+                count+= mp[{f,s}];
+           }
+           mp[{(x-f)%x, s}]++;
+        }
+        cout << count << '\n';
+
+    }
+    return 0;
+}
