@@ -1,0 +1,38 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-06-20 17:47:35
+// Problem Name: N - Songs Compression
+// Learned     : مش فاهم ليه جاب غلط مع ان اللوجيك صح ..نغير الكود و نجرب وحتى لو طلعت صح مش منطقي بردو مهو نفس اللوجيك
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int n, m;
+    cin >> n >> m;
+    ll sum =0;
+    int diff[n];
+    for(int i = 0 ; i < n; i++){
+        int a, b; cin >> a >> b;
+        sum +=a;
+        diff[i] = a - b; 
+    }
+    sort(diff, diff+n , greater<int>());
+
+    int count= 0;
+    int i = 0;
+    while(sum > m && i < n){
+        sum-= diff[i];
+        i++;
+        count++;
+    }
+    if(sum <= m){
+        cout << count;
+    }
+    else{
+        cout << -1;
+    }
+    return 0;
+}
