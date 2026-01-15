@@ -1,0 +1,22 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-01-15 21:56:10
+// Problem Name: A_Social_Experiment
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        if(n < 4) cout << n << '\n';
+        else if( !(n % 2)) cout << 0 << '\n';
+        else cout << 1 << '\n';
+
+    }
+    return 0;
+}
