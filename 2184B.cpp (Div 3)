@@ -1,0 +1,37 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-01-16 11:28:10
+// Problem Name: B_Hourglass
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int s, k, m;cin >> s >> k >> m;
+        if(s == k ){
+            m%=k;
+            cout << k - m << '\n';
+        }else if( s < k){
+            m%= k;
+            if( m >= s)cout << 0 << '\n';
+            else cout << s - m << '\n';
+        }else{
+            int sign = m/k;
+            
+            m%= k;
+            if(sign%2){ // odd
+                // k < m
+                cout << k-m << '\n';
+            }else{
+                cout << s-m << '\n';
+            }
+        }
+
+    }
+    return 0;
+}
