@@ -1,0 +1,142 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-01-18 18:00:23
+// Problem Name: E_The_Robotic_Rush
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+ll const INF_NEG= -1e18;
+ll const INF_POS= 1e18;
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n, m, k; cin >> n >> m >> k;
+        vector<pair<ll,pair<ll,ll>>> v(n);
+        for(int i = 0 ; i < n;i++){
+            cin >> v[i].first;
+        }
+        vector<ll> m_arr(m);
+        for(int i = 0 ;i < m ;i++){
+            cin >> m_arr[i];
+        }
+        sort(m_arr.begin(),m_arr.end());
+
+        map<ll,ll> mp; // the pos , the number of robots that will crash at such a pos
+        map<ll, set<ll>> l, r;
+        // find the rege for each robot
+        for(int i = 0 ; i < n;i++){
+            auto u = upper_bound(m_arr.begin(),m_arr.end(),v[i].first)-m_arr.begin(); // Olog (n)
+
+            ll up;// up rage
+            if(u == m){ // if there is no right spikes 
+                up= INF_POS;
+            }
+            else{
+                up= m_arr[u];
+            }
+            ll down ;// down rage
+            if(u == 0){ // there is no left spikes
+                down = INF_NEG;
+            }else{
+                down = m_arr[u-1];
+            }
+            // normalize
+            if(down == INF_NEG){
+                up -= v[i].first;          
+            }
+            else if(up == INF_POS){
+                down -= v[i].first;  
+            }else{
+                down -= v[i].first; 
+                up -= v[i].first;
+            }
+            r[up].insert(i);
+            l[down].insert(i);
+            v[i].second={down,up};
+
+            // cout << "robot " << i << " left: " <<down  << " right: " << up <<'\n';
+        }
+        // return 0;
+        // for(auto x : r){
+        //     cout << "First : " << x.first << '\n';
+        //     for(auto y : x.second){
+        //         cout << y << " ";
+        //     }
+        // }
+        // for(auto x : l){
+        //     cout << "First : " << x.first << '\n';
+        //     for(auto y : x.second){
+        //         cout << y << " ";
+        //     }
+        // }   
+        // cout << "//////////////";
+        // for(auto x : r[-1]){
+        //         cout << x <<" ";
+        // }  
+        // return 0;
+        ll alive = n;
+        ll state = 0;
+        for(int i = 0 ; i < k; i++){
+            char op; cin >> op;
+            if(op == 'R') state++;
+            else state--;
+            vector<ll> num;
+            // cout << "state: " << state << '\n';
+            if(state > 0){ // the spike is in the right side of the robot
+                
+                for(auto x : r[state]){
+                        num.push_back(x); // get the indexs of the robots
+                    // cout << x <<" ";
+                }
+                alive-= (int)num.size();
+                r.erase(state);
+                for(auto x : num){
+                    l[v[x].second.first].erase(x);
+                }
+            }else{
+                for(auto x : l[state]){
+                        num.push_back(x);
+                    // cout << x <<" ";                    
+                }
+                alive-= (int)num.size();
+                l.erase(state);
+                for(auto x : num){
+                    r[v[x].second.second].erase(x);
+                }
+            }
+            // cout << num.size();
+            // for(auto x : num){
+            //     cout << x << " ";
+            // }
+            // cout << '\n';
+            cout << alive<< " ";
+        }
+
+        cout << '\n';
+    }
+    return 0;
+}
+
+/* Thinking 
+now we have each robot and the right and left limits 
+in each move all robots are goining to move 
+so the first thought is to move all robots and so it hit the limit then it will die 
+but that take time complexity O(t * k * n)  => time limit exceed 
+the time complixty O(t * k * log n) is assintial and we can notice that the time is 3 second 
+RRL is not RLR
+to solve the problem of 
+the adge case is to make to death the hole period t => max , n => max ,  k => max , m = 1 
+if it was in one deriction 
+
+map ( key = rage , val => num of robots that will crash in this pos) 
+multi_map ( key = rage , val => related)
+
+
+|___robot__________| |___robot_| |______robot_|set( (-3,1), (-3, 4),(-5,6),(-1,8) )
+
+we have the 3 -> (-1,-2,-5)
+
+*/
