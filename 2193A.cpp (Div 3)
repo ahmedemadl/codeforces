@@ -1,0 +1,31 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-01-25 16:36:46
+// Problem Name: A_DBMB_and_the_Array
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        ll n, s, x;cin >> n  >> s >> x;
+        ll sum = 0;
+        for(int i = 0;  i < n;i++){
+            int num;cin >> num;
+            sum+= num;
+        }
+        // cout << sum  << "  ////";
+        if(sum == s){cout << "YES" << '\n';}
+        else if(sum > s){cout << "NO" << '\n';}
+        else{
+            if((s - sum ) % x == 0)cout << "YES" << '\n';
+            else cout << "NO" << '\n';
+        }
+
+    }
+    return 0;
+}
