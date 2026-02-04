@@ -1,0 +1,42 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-01-25 17:02:59
+// Problem Name: C_Replace_and_Sum
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        ll n , q;cin >>n >> q;
+        ll a[n],b[n],prefix[n+1];
+        prefix[0]=0;
+        for(int i = 0 ;i < n;i++){
+            cin >> a[i];
+        }
+        for(int i = 0 ;i < n;i++){
+            cin >> b[i];
+        }
+        //step 1 maximize the arr
+        a[n-1] = max(a[n-1], b[n-1]); 
+        prefix[n] = a[n-1];
+        for(int i = n-2 ;i >= 0;i--){
+            a[i] = max({a[i], a[i+1], b[i]});
+            prefix[i+1] = a[i];
+        }
+        // step 2 make the prefix sum
+        for(int i = 1 ;i <= n;i++){
+            prefix[i] += prefix[i-1];
+        }
+        while(q--){
+            ll l, r; cin >> l >> r;
+            cout << prefix[r] - prefix[l-1]<< " ";
+        }
+        cout << '\n';
+    }
+    return 0;
+}
