@@ -1,0 +1,38 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-01-16 13:08:02
+// Problem Name: C_Huge_Pile
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n, k;cin >> n >> k;
+        if(n == k){
+            cout << 0 << '\n';
+            continue;
+        }
+        int count=0;
+        while(n>1){
+            count++;
+            if(n%2){
+                if(k == n/2 +1 || k == n/2){
+                    break;
+                }
+            }else{
+                if(k == n/2){
+                    break;
+                }
+            } 
+            n/=2;
+        }
+        if(n == 1) count = -1;
+        cout << count << '\n';
+    }
+    return 0;
+}
