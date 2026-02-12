@@ -1,0 +1,58 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-02-12 07:32:58
+// Problem Name: D_GCD_sequence
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+
+int chack(vector<int> arr){
+    for(int i = 0; i < arr.size()-2 ;i++){
+        if(__gcd(arr[i], arr[i+1]) > __gcd(arr[i+1], arr[i+2])){
+            return i;
+        }
+    }
+    return -1;
+}
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        vector<int> arr(n);
+        for(int i = 0 ;i < n; i++){
+            cin >> arr[i];
+        }
+        int pos = chack(arr);
+        if(pos == -1){
+            cout << "YES" << '\n';
+            continue;
+        }
+        bool it_works=0;
+        for(int i= pos;i <= pos+2; i++){
+            vector<int> f=arr;
+            f.erase(f.begin()+i);
+            if(chack(f) == -1){
+                it_works = 1;
+                break;
+            }
+        }
+        if(it_works)cout <<"YES" << '\n';
+        else cout << "NO" << '\n';
+
+    }
+    return 0;
+}
+/*
+6
+11 14 8 12 9 3
+1  2  4 3  3 
+
+11 14 12 9 3
+1  2  3  3
+
+*/
