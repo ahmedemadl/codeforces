@@ -1,0 +1,45 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-02-12 14:33:17
+// Problem Name: C_Non_coprime_Split
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+	
+	// O(Sqrt(n))
+	// power of 2 : O(logbase2) best case
+	vector<int> primefactorization(int n){
+	    vector<int>factor;
+	    for(int i =  2 ; i*i <= n ; i++){
+	        while(n%i == 0){
+	            factor.push_back(i);
+	            n/=i;
+	        }
+	    }
+	    if(n>1) factor.push_back(n);
+	    return factor;
+	}
+
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int l,r ;cin >> l >> r;
+        int ans=0, factor=0;
+        for(int i = l ; i <= r; i++){
+            vector<int> v = primefactorization(i);
+            if(v.size() > 1){
+                ans= i;
+                factor = v[0];
+                break;
+            }
+        }
+        if(ans) cout << ans - factor << " " <<factor << '\n'; 
+        else cout << -1 << '\n';
+
+    }
+    return 0;
+}
