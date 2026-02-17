@@ -1,0 +1,26 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2025-06-20 17:38:03
+// Problem Name: M - Short Substrings
+// Learned     : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    short t; cin >>t;
+    while(t--){
+        string s; cin >>s;
+        string ans="";
+        ans+=s[0];
+        for(int i = 1 ; i < s.size()-1 ; i+=2){
+            ans+=s[i];
+        }
+        ans+=s[s.size()-1];
+        cout << ans << '\n';
+    }
+
+    return 0;
+}
