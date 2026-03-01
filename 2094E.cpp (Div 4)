@@ -1,0 +1,44 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-03-01 05:48:40
+// Problem Name: E_Boneca_Ambalabu
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        vector<ll> v(n), freq(30);
+        for(int i = 0 ;i < n;i++){
+            cin >> v[i];
+            for(int j = 0 ; j < 30; j++){
+                if(v[i] & (1 << j))freq[j]++;
+            }
+        }
+        ll mx=0;
+        for(int i = 0 ;i < n;i++){
+            ll sum=0;
+            for(int j = 0; j < 30; j++){
+                if(v[i] & (1 << j)){
+                    sum += (1 << j) * (n- freq[j]);
+                }else{
+                    sum += (1 << j) * freq[j];
+                }
+            }
+            mx = max(mx, sum);
+        }
+        cout << mx << '\n';
+    }
+    return 0;
+}
+/*
+the solution is brute force
+the thing is to caluclate the answer of one element 
+you don't have to do (ak ^ ai) + .......
+you make a freq[30] of each bit and calculate the answer
+*/
