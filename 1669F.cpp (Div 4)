@@ -1,0 +1,39 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-03-09 20:40:05
+// Problem Name: F_Eating_Candies
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        vector<int> v(n);
+        for(int &i : v)cin>> i;
+        ll l=0,r=n-1, sum1=v[0],sum2=v[n-1], ans=0;
+        while(l < r){
+            if(sum1 == sum2){
+                ans= (l+1 + (n-r));
+                l++;
+                r--;                
+                sum1+= v[l];
+                sum2+=v[r];
+
+            }else if(sum1 > sum2){
+                r--;
+                sum2+=v[r];
+
+            }else{
+                l++;
+                sum1+= v[l];
+            }
+        }
+        cout << ans << '\n';
+    }
+    return 0;
+}
