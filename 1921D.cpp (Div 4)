@@ -1,0 +1,53 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-03-10 02:38:41
+// Problem Name: D_Very_Different_Array
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n, m;cin >> n >> m;
+        vector<int> a(n), b(m);
+        for(int i =0  ;i < n;i++){
+            cin >> a[i];
+        }
+        for(int i =0  ;i < m;i++){
+            cin >> b[i];
+        }
+        sort(a.begin(), a.end());
+        sort(b.begin(), b.end());
+        ll sum =0;
+        int al= 0, ar= n-1, bl= 0, br= m-1;
+        for(int i = 0 ; i< n;i++){
+            int left = max(abs(a[al] - b[bl]),abs(a[al] - b[br]));
+            int right =max(abs(a[ar] - b[bl]),abs(a[ar] - b[br]));
+            if(left < right){
+                if(abs(a[ar] - b[bl]) > abs(a[ar] - b[br])){
+                    sum += abs(a[ar] - b[bl]);
+                    bl++;
+                }else{
+                    sum +=abs(a[ar] - b[br]);
+                    br--;
+                }
+                ar--;
+            }else{
+                if(abs(a[al] - b[bl]) > abs(a[al] - b[br])){
+                    sum += abs(a[al] - b[bl]);
+                    bl++;
+                }else{
+                    sum += abs(a[al] - b[br]); 
+                    br--;
+                }
+                al++;
+            }
+        }
+        cout << sum << '\n';
+    }
+    return 0;
+}
