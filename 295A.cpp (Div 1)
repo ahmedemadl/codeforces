@@ -1,0 +1,84 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-03-12 04:36:29
+// Problem Name: A_Greg_and_Array
+// Note        : partial sum final boss, NO HINT but grind till you solve it
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+
+        int n, m, k;cin >> n >> m >> k;
+        vector<pair<ll,ll>> op(m);
+        vector<ll> d(m), v(n);
+        for(int i = 0 ;i < n; i++){
+            cin >> v[i];
+        }
+        for(int i = 0 ;i < m ;i++){
+            ll l, r, x;cin >> l >> r >> x;
+            r--;
+            l--;
+            op[i]={l, r};
+            d[i] = x;
+        }
+        vector<ll> partial(m);
+        while(k--){
+            ll l , r;cin >> l >> r;
+            l--;
+            r--;
+            partial[l]++;
+            if(r != m-1)
+                partial[r+1]--;
+        }
+        for(int i = 1 ;i < m; i++){
+            partial[i]+= partial[i-1];
+            
+        }
+        // testing
+        // for(int i = 0 ;i < m;i++){
+        //     cout << partial[i] << " ";
+        // }
+        for(int i = 0 ;i < m; i++){
+            d[i] *= partial[i];
+
+        }
+        // testing
+        // cout << '\n';
+        // for(int i = 0 ;i < n;i++){
+        //     cout <<  d[i] << " ";
+        // }
+
+        vector<ll> b(n);
+        for(int i = 0 ;i < m;i++){
+            b[op[i].first] += d[i];
+            if(op[i].second != n-1){
+                b[op[i].second+1]-= d[i];
+            }
+        }
+        for(int i = 1; i < n;i++){
+            b[i]+= b[i-1];
+        }
+        for(int i = 0; i < n;i++){
+            cout << b[i]+v[i] << " ";
+        }        
+
+    return 0;
+}
+/*
+Thinking 
+1 4 7
+1
+
+
+1 2 d
+عندك اراي فكك منها 
+اشتغل على اراي اسمها b
+and then you try to excute the k operations 
+using partial sum you compute 
+okay so I have the logic, It doesn't work , so we test it manually
+the problem was silly , you had to r--;l--; that's it
+
+*/
