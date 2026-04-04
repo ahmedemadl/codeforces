@@ -1,0 +1,39 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-04-04 19:28:11
+// Problem Name: D_The_67_th_OEIS_Problem
+// Note        : عدل يا بيه التيمبليت بلاش فلح
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+const int maxn = 2e5 + 5;
+vector<int> primes;
+vector<bool> is_prime(maxn, true);
+void sieve() {
+    is_prime[0] = is_prime[1] = false;
+    for(int i = 2; i < maxn; i++) {
+        if(is_prime[i]) {
+            primes.push_back(i);
+            for(int j = 2 * i; j < maxn; j += i) {
+                is_prime[j] = false;
+            }
+        }
+    }
+}
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    sieve();
+    int t;cin >> t;
+    while(t--){
+        ll n;cin >> n;
+        cout << 1 << " ";
+        for(ll i = 2 ;i <= n; i++){ 
+            cout << (ll)primes[i] * primes[i-1] << " ";
+        }
+    cout << '\n';
+    }
+    
+    return 0;
+}
