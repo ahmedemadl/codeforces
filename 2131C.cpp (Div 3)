@@ -1,0 +1,49 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-03-30 07:36:30
+// Problem Name: C_Make_it_Equal
+// Note        : I cooked 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n , k;cin >> n >> k;
+        vector<int> a(n), b(n);
+        for(int i = 0 ;i < n;i++){
+            int num;cin >> num;
+            a[i] = num % k;
+            a[i] = min(k - a[i],a[i]);
+        }
+        for(int i = 0 ;i < n;i++){
+            int num;cin >> num;
+            b[i] = num % k;
+            b[i] = min( k-b[i], b[i]);
+        }
+        sort(a.begin() , a.end());
+        sort(b.begin() , b.end());
+        if(a == b)cout << "YES\n";
+        else cout << "NO\n";
+    }
+    return 0;
+}
+/*
+so to get a number y
+and I have x 
+if (y < x){
+    y + (n*k) = x
+    (n*k) = x -y
+    if((x - y) % k == 0)
+    when n is integer
+
+}else if(y > x){
+    x + (n*k) = y
+
+    if(y-x)
+}
+    /7410
+*/
