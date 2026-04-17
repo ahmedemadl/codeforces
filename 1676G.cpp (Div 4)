@@ -1,0 +1,46 @@
+//=====================================================
+// Author      : not me
+// Date        : 2026-04-17 22:42:57
+// Problem Name: G_White_Black_Balanced_Subtrees
+// Note        : Graph is hard, specially the implementation
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int N = 40001;
+vector<int> adj[N];
+string x;
+
+vector<int>  dfs(int i, int parent = -1){ // 0 -> B , 1 -> W, 2 -> sum
+    int b= (x[i - 1] == 'B'), w = (x[i - 1] == 'W'), s = 0;
+    for(auto it : adj[i]){
+        if(it != parent){
+        vector<int> arr = dfs(it, i);
+            b+= arr[0];
+            w+= arr[1];
+            s+= arr[2]; 
+        }
+    }
+    if(w == b){
+        s++;
+    }
+    return {b, w, s};
+}
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        for(int i = 2; i <= n;i++){
+            int a; cin >> a;
+            adj[a].push_back(i);
+        }
+        cin >> x;
+        cout << dfs(1)[2]<< '\n';
+        for(int i = 1 ;i <= n; i++){
+            adj[i].clear();
+        }
+    }
+    return 0;
+}
