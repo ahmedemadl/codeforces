@@ -1,0 +1,69 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-04-18 19:25:09
+// Problem Name: A_Maze
+// Note        : يارب فك الديقه
+// غلطة عبيييطههههههههه ههههههههههههههه
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+// const int N;
+vector<string> adj;
+int count;
+int  n, m, k;
+// directions
+int dx[4] = {0, 0, -1, 1};
+int dy[4] = {1, -1, 0, 0};
+bool vis[501][501];
+
+bool valid(int i, int j){
+    return i >= 0 && j >= 0 && i < n && j < m && adj[i][j] == '.' && !vis[i][j];   
+}
+
+void dfs(int i, int j){
+    vis[i][j]=1;
+    // debug
+    // cout << i << " "  << j << '\n';
+    // loop on the directions
+    for(int r = 0; r < 4; r++){
+        // we have to make sure it is valid
+        int nx = dx[r] + i, ny = dy[r] + j;
+        if(valid(nx, ny)){
+            dfs(nx, ny);
+        }
+    }
+    if(k){
+        adj[i][j] = 'X';
+        k--;
+    }
+}
+
+int main(){
+    cin >> n >> m >> k;
+    adj = vector<string>(n);
+    // step one , pocess data
+    for(int i = 0 ;i < n; i++){
+        string s;cin >> s;
+        adj[i] = s; 
+    }
+    // dfs on . one time because there is only one connected area
+    // or that is what I understand
+    bool finish = 0;
+    for(int i = 0 ;i < n;i++){
+        for(int j = 0 ; j < m ; j++){
+            if(adj[i][j] == '.'){
+                dfs(i, j);
+                finish = 1;
+                break;
+            }
+        }
+        if(finish)break;
+    }
+    // print the grid
+    for(int i = 0; i < n; i++){
+        cout << adj[i] << '\n';
+    }
+    
+    return 0;
+}
