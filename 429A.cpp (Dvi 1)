@@ -1,0 +1,60 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-04-19 01:27:14
+// Problem Name: A_Xor_tree
+// Note        : للاسف الشديد
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int N = 1e5 + 1;
+vector<int> adj[N];
+int vis[N];
+int color[N];
+int goal[N];
+vector<int> ans;
+void dfs(int node, int level = 0,int even = 0,int odd = 0){
+    vis[node] = 1;
+    int cur;
+    if(level%2 == 0){
+        cur = (color[node] + even)%2;
+    }else{
+        cur = (color[node] + odd)%2;
+    }
+    if(cur != goal[node]){
+        ans.push_back(node);
+        if(level%2 == 0)even++;
+        else odd++;
+    }
+
+    for(auto x : adj[node]){
+        if(!vis[x])
+        dfs(x, level+1,even, odd);
+    }        
+
+}
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int n;cin >> n;
+    for(int i = 1; i <= n - 1; i++){
+        int a, b;cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    for(int i = 1 ;i <= n; i++){
+        cin >> color[i];
+    }
+    for(int i = 1 ;i <= n; i++){
+        cin >> goal[i];
+    }
+    dfs(1);
+
+    cout << ans.size() << '\n';
+    for(int x : ans)cout << x << '\n';
+    return 0;
+}
+/*
+
+*/
