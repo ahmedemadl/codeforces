@@ -1,0 +1,64 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-04-24 08:38:52
+// Problem Name: E_The_Lakes
+// Note        : easy easy
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int N= 1001, M= 1001;
+int dx[4] = {0, 0, -1, 1};
+int dy[4] = {-1, 1, 0 ,0};
+bool vis[N][M];
+ll grid[N][M];
+int n, m;
+ll sum =0;
+ll subsum=0;
+bool valid(int i, int j){
+    return i >= 0 && j >= 0 && i < n && j < m && !vis[i][j] && grid[i][j];
+}
+
+void dfs(int i, int j){
+    vis[i][j]=true;
+    subsum += grid[i][j];
+    for(int dir = 0; dir < 4; dir++){
+        int nx = i+dx[dir],ny= j+dy[dir];
+        if(valid(nx, ny)){
+            dfs(nx, ny);
+        }
+    }
+}
+
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        cin >> n >> m;
+
+        for(int i= 0 ;i <n ;i++){
+            for(int j = 0 ; j < m ; j++){
+                cin >> grid[i][j];
+            }
+        }
+        for(int i= 0 ;i <n ;i++){
+            for(int j = 0 ; j < m ; j++){
+                if(valid(i,j)) dfs(i, j);
+                sum = max(sum, subsum);
+                subsum=0;
+            }
+        }   
+
+        cout << sum << '\n';
+        // clear
+        for(int i= 0 ;i <n ;i++){
+            for(int j = 0 ; j < m ; j++){
+                grid[i][j]=0;
+                vis[i][j]=0;
+            }
+        }
+        sum =0;
+    }
+    return 0;
+}
