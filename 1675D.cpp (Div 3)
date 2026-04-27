@@ -1,0 +1,76 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-04-23 06:10:15
+// Problem Name: D_Vertical_Paths
+// Note        : wrong test case 2
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int N = 2 * 1e5 + 1;
+vector<int> adj[N];
+vector<int> ans[N];
+int vis[N];
+int s=1;
+void dfs(int node,int parent){
+    vis[node] =1;
+    ans[s].push_back(node);
+    // end of leaf
+    if(adj[node].size() == 0){
+        s++;
+        return;
+    }
+    for(int child : adj[node]){
+        if(!vis[child]){
+            dfs(child, node);
+        }
+    }
+}
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        int first;
+        for(int i = 1 ;i <= n; i++){
+            int p; cin >> p;
+            if(i == p )first= p;
+            else adj[p].push_back(i);
+        }
+        // what do I need
+        // node, parent , i 
+        dfs(first,first);
+
+        int i = 1;
+        cout << s - 1 << '\n';
+        while(ans[i].size() > 0){
+            cout << ans[i].size() << '\n';
+            for(int x : ans[i]) cout << x << " ";
+            cout << '\n';
+            ans[i].clear();
+            i++;
+        }
+        cout << '\n';
+        // clear adj and vis DS
+        for(int i = 1 ;i <= n; i++){
+            adj[i].clear();
+        }
+        for(int i = 1; i <= n; i++){
+            vis[i] = 0;
+        }
+        s=1;
+        
+    }
+    return 0;
+}
+/*
+in a normal dfs search I can print the paths 
+but in the problem he wants me to print the length first
+and so I can't know the length before I reach end of the leaf
+I need to store the paths
+and print the length and then the pass
+can I make a stack of vector
+vector of vector , array of vector ? 
+
+*/
