@@ -1,0 +1,112 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-04-30 18:13:20
+// Problem Name: D_Palindromex
+// Note        : اسبااااااااكتي كووووووود
+
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        n*=2;
+        vector<int> v(n);
+        for(int i = 0 ;i < n;i++){
+            cin >> v[i];
+        }
+        int mx = 0;
+        int pos1=-1, pos2=-1;
+        
+        for(int i = 0;i < n;i++) if(v[i] == 0) {pos1 = i;break;}
+        for(int i = n-1;i >= 0;i--) if(v[i] == 0) {pos2 = i;break;}
+        if(pos1 == -1){cout << 0 << '\n';continue;}
+        vector<bool> freq((n/2) +1 , false);
+        freq[0]=1;
+        int valid=1;
+        int pos_1 = pos1;
+        int pos_2 = pos2;
+        int pos11 = pos1;
+        int pos22 = pos2;
+        //option one 
+        // even number in between
+        if((pos2 - pos1) %2){
+            while(pos2 - pos1 >= 1){
+                if(v[pos1] != v[pos2]){valid =0; break;}
+                freq[v[pos1]]=1;
+                pos1++;
+                pos2--;
+                // cout << v[pos1] << " ";
+            }
+        }else{//  odd in between
+            while((pos2 - pos1) >= 0){
+                if(v[pos1] != v[pos2]){valid =0; break;}
+                pos1++;
+                pos2--;
+                freq[v[pos1]]=1;
+            }
+        } 
+        // cout << '\n';
+        if(valid){
+        //check 
+            while(pos_1 >= 0 && pos_2 < n && v[pos_1] == v[pos_2]){
+                    freq[v[pos_1]]=1;
+                    // cout <<v[pos_1] <<"    ";
+                    pos_1--;
+                    pos_2++;
+            }   
+            int ans;
+            for(int i = 0 ; i < (n/2)+1 ;i++){
+                // cout << i << " " << v[i] << " // ";
+                if(freq[i] == 0){ ans = i;break;}
+            }
+
+            mx = max(ans, mx);
+        }
+        else{
+            mx = 1;
+        }
+        // option 2
+        vector<int> freq1((n/2)+ 1 , 0), freq2((n/2)+ 1 , 0);
+        freq1[0]=1;
+        freq2[0]=1;
+        int pt=1;
+        while(pos11 - pt >= 0 && pos11+pt < n && v[pos11-pt] == v[pos11+pt]){
+            freq1[v[pos11-pt]]=1;
+            pt++;
+        }
+        pt=1;
+        while(pos22 - pt >= 0 && pos22+pt < n && v[pos22-pt] == v[pos22+pt]){
+            freq2[v[pos22-pt]]=1;
+            pt++;
+        }
+        for(int i = 0; i < (n/2) +1 ;i++){
+            if(freq1[i] == 0){
+                mx = max(i, mx);
+                break;
+            }
+        }
+        for(int i = 0; i < (n/2) +1 ;i++){
+
+            if(freq2[i] == 0){
+                mx = max(i, mx);
+                break;
+            }
+        }
+
+
+        cout << mx << '\n';
+    }
+    return 0;
+}
+/*
+let think and take our time , why not 
+why the approach is wrong when it should only get time limit
+appears exactly twice in the array.
+a7a ana lesa wa5d bally
+*/
