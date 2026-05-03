@@ -1,0 +1,64 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-05-03 22:45:28
+// Problem Name: B_Bear_and_Prime_100
+// Note        : الحشيش تمام .. هموووووت وانام وبحل ديف 1
+// يا برو اشتغل عشان انام الله يكرمك
+// ans <= 1 
+// مش محتاجه يعني بصوت عادل امام
+// بص يا خال انت جبت الفكره بس محاج تعدل في الكود 
+// ارجع خطووووووووه عشان 
+// فاااااااهم حاجه 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+	
+	const int maxn = 100000;
+	vector<int> primes;
+	vector<bool> is_prime(maxn, true);
+	void sieve() {
+	    is_prime[0] = is_prime[1] = false;
+	    for(int i = 2; i < maxn; i++) {
+	        if(is_prime[i]) {
+	            primes.push_back(i);
+	            for(int j = 2 * i; j < maxn; j += i) {
+	                is_prime[j] = false;
+	            }
+	        }
+	    }
+	}
+
+
+bool ask(int a,int b){
+    cout << a << " " << b;
+
+}
+
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    sieve();
+    int q = 20;
+    int ans = 0;
+    int m =1;
+    int count =0 ;
+    for(int i = 0 ;i < 20;i++){
+        if(count == 20 || primes[i] * m > 100)break;
+        cout << primes[i]*m << '\n';
+        count ++;
+
+        cout.flush();
+        string s; cin >> s;
+        if(s == "yes"){
+            ans++;
+            m = primes[i];
+            i--;
+        }
+    }
+
+    if(ans <= 1) cout << "prime";
+    else cout << "composite";
+    return 0;
+}
+// master of interactive.
