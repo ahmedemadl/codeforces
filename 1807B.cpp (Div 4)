@@ -1,0 +1,29 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-05-04 23:40:45
+// Problem Name: B_Grab_the_Candies
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        ll t_e=0, t_o=0;
+        while(n--){
+            int num;cin >> num;
+            if(num&1){
+                t_o+= num;
+            }else{
+                t_e+= num;
+            }   
+        }
+        if(t_e > t_o) cout << "YES\n";
+        else cout << "NO\n";
+    }
+    return 0;
+}
