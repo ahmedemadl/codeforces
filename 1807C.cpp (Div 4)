@@ -1,0 +1,33 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-05-06 23:52:49
+// Problem Name: C_Find_and_Replace
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        string s;cin >> s;
+        vector<int> ch[26];
+        for(int i = 0 ;i <n;i++){
+            ch[s[i] - 'a'].push_back(i);
+        }
+        bool valid =1;
+        for(int i = 0 ;i < 26; i++){
+            for(int j = 1 ; j < ch[i].size() ; j++){
+                if(ch[i][j]%2 != ch[i][j-1]%2){
+                    valid= 0;
+                }
+            }
+        }
+        if(valid) cout << "YES\n";
+        else cout << "NO\n";
+    }
+    return 0;
+}
