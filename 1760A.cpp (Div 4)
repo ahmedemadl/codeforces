@@ -1,0 +1,22 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-05-12 23:43:28
+// Problem Name: A_Medium_Number
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int arr[3];
+        cin >> arr[0] >> arr[1] >> arr[2];
+        sort(arr, arr+3);
+        cout << arr[1] << '\n';
+
+    }
+    return 0;
+}
