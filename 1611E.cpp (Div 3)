@@ -1,0 +1,76 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-05-12 23:08:14
+// Problem Name: E_1_Escape_The_Maze_easy_version
+// Note        : master piece
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+const int N = 2* 1e5 +1;
+vector<int> adj[N], cost(N, 1e9);
+
+void bfs(queue<int> & q){
+    while(!q.empty()){
+        int node = q.front();
+        int cur_cost = cost[node];
+        q.pop();
+        for(auto child : adj[node]){
+            if(cost[child] == 1e9){
+                cost[child] = cur_cost + 1;
+                q.push(child);
+            }
+        }
+    }
+}
+int vis[N];
+bool ans = 0;
+void dfs(int node,int parent , int l){
+    vis[node] = 1; 
+    // check for the end of the leaf
+    if(adj[node].size() == 1 && adj[node][0] == parent){ 
+        if(l < cost[node]){
+            ans = 1;
+        }
+    }
+    for(auto child : adj[node]){
+        if(!vis[child]){
+            dfs(child, node ,l+1);
+        }
+    }
+}
+
+void clearing(int n){
+    for(int i = 1 ;i <= n; i++){
+        vis[i]= 0;
+        adj[i].clear();
+        cost[i] = 1e9;
+    }
+    ans = 0;
+}
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n, k; cin >> n >> k;
+        queue<int> x; // for the Multi - source (friends's position)
+        for(int i = 0 ;i < k ;i ++){
+            int num; cin >> num;
+            x.push(num);
+            cost[num] = 0;
+        }
+        for(int i = 0;i < n-1 ;i++){
+            int a, b; cin >> a >> b;
+            adj[a].push_back(b);
+            adj[b].push_back(a);
+        }
+        bfs(x); // calculate the cost frist
+        dfs(1, -1, 0); //  check if scape is possible
+        cout << (ans ? "YES\n" : "NO\n");
+        // clear
+        clearing(n);
+    }
+    return 0;
+}
