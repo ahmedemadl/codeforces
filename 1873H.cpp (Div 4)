@@ -1,0 +1,128 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-05-14 16:03:52
+// Problem Name: H_Mad_City
+// Note        : debug hard core
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int N = 2 * 1e5 + 1;
+vector<int> adj[N];
+int V_cost[N], M_cost[N];
+int n, a1, b1;
+// build cost
+void bfs(int b){
+    for(int i= 0; i <= n ;i++){
+        V_cost[i] = 1e9;
+    }
+    V_cost[b] = 0;
+    queue<int> q;
+    q.push(b);
+    while(!q.empty()){
+        int node = q.front();
+        int c = V_cost[node];
+        q.pop();
+        for(auto child : adj[node]){
+            if(V_cost[child] == 1e9){
+                V_cost[child] = c + 1;
+                q.push(child);
+            } 
+        }
+    }
+}
+
+// cycle detection
+bool cycle[N];
+bool vis[N];
+int par[N];
+bool ans = 0;
+void dfs(int node, int parent , int l){
+    vis[node]=1;
+    par[node] = parent;
+
+    for(auto child : adj[node]){
+        if(!vis[child]){
+            dfs(child, node, l+1);
+        }else if(vis[child] && child != parent){
+            // cycle
+            // while loop
+            int count = 1;
+            int cur = node;
+
+            while(cur != child){
+                cycle[cur]= 1;
+                
+                cur = par[cur];
+
+                count++;
+            }
+            cycle[cur] = 1;
+            ans = 1;
+        }
+        if(ans) break;
+    }
+
+
+}
+// for marcel
+bool ans2 = 0;
+void bfs2(int a){
+    for(int i = 0 ; i <= n ;i++){
+        M_cost[i] = 1e9;
+    }
+    M_cost[a] = 0;
+    queue<int> q;
+    q.push(a);
+    while(!q.empty()){
+        int node = q.front();
+        int c = M_cost[node];
+        if(cycle[node] && M_cost[node] < V_cost[node]){
+            ans2 = 1;
+            break;
+        }
+        q.pop();
+        for(auto child : adj[node]){
+            if(M_cost[child] == 1e9){
+                M_cost[child] = c + 1;
+                q.push(child);
+            } 
+        }
+    }
+}
+
+// نظف عايزها تبرق
+void clearing(){
+    for(int i = 0 ; i <= n;i ++){
+        adj[i].clear();
+        vis[i]=0;
+        V_cost[i]=0;
+        M_cost[i]=0;
+        cycle[i]=0;
+        par[i]=0;
+    }
+    ans= 0;
+    ans2 =0;
+}
+
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        cin >> n >> a1 >> b1;    
+        for(int i = 0 ;i < n;i++){
+            int u, v; cin >> u >> v;
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        bfs(a1);
+        dfs(1, -1, 1);
+        if(ans == 0){ cout << "NO\n";continue;};
+        bfs2(b1);
+        cout << (ans2 ? "YES\n" : "NO\n");
+        // clear
+        clearing();
+    }
+    return 0;
+}
