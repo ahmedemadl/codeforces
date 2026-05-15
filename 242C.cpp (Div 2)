@@ -1,0 +1,78 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-05-16 00:26:22
+// Problem Name: C_King_s_Path
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+map<pair<int,int>, bool> vis;
+map<pair<int,int>, int> cost;
+
+int dx[8] = {0 , 0 , -1, 1, 1 , -1, -1 , 1};
+int dy[8] = {-1, 1 , 0 , 0, 1 , 1, -1 , -1};
+
+bool valid(int i,int j){
+    return vis[{i, j}] && cost[{i,j}] == 1e9;
+}
+
+int ans = -1;
+
+void bfs(int xo,int yo,int x1,int y1){
+    
+    queue<pair<int,int>> q;
+    q.push({xo,yo});
+    pair<int,int> targ = {x1, y1};
+    // pair<int,int> targ{x1,y1};
+    while(!q.empty()){
+        pair<int,int> node = q.front();
+        int c = cost[node];
+        if(node == targ){
+            ans = c;
+            break;
+        }
+        q.pop();
+        for(int i = 0 ;i < 8; i++){
+            int nx = dx[i] + node.first, ny = dy[i] + node.second;
+            if(valid(nx,ny)){
+                cost[{nx, ny}] = c + 1;
+                q.push({nx,ny});
+            }
+        }
+    }
+    
+}
+
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+        
+    int xo,yo, x1, y1;
+    cin >> xo >> yo >> x1 >> y1;
+    int n; cin >> n;
+    while(n--){
+        int r, a,b; cin >> r >> a >> b;
+        for(int i = a ;i <= b ; i++){
+            vis[{r,i}] = 1;
+            cost[{r,i}] = 1e9;
+        }
+    }
+    cost[{xo, yo}] =0;
+    bfs(xo,yo, x1, y1);
+    cout << ans;
+    return 0;
+}
+/*
+the frist problem is the data processing (container)
+so ......
+the solution is map !
+how to solve the rest ?
+man it's a shortest path problem
+easy work
+minimum number of moves 
+
+
+
+*/
