@@ -1,0 +1,84 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-05-20 01:38:59
+// Problem Name: B_Jumping_on_Walls
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+string sl, sr;
+int n, k;
+const int N = 1e5 +1;
+int cost [N][2];
+int ans = -1;
+bool valid(int i, int d,int cur_cost){
+    if(i >= n){
+        ans = cur_cost+1;
+    }
+    if(d == 0){
+        return i >= 0 && i < n && sl[i] == '-' && cost[i][d] == 1e9 && cur_cost + 1 <= i ;
+    }else{
+        return i >= 0 && i < n && sr[i] == '-' && cost[i][d] == 1e9 && cur_cost + 1 <= i ;
+    }
+}
+
+void bfs(){
+    for(int i = 0; i < n;i++){
+        cost[i][0] = 1e9;
+        cost[i][1] = 1e9;
+    }
+    // how can we bulid the adjacent list
+    // we don't have to
+    queue<pair<int,int>> q;
+    q.push({0,0});
+    cost[0][0] = 0;
+    while(!q.empty() && ans == -1){
+        pair<int,int> node = q.front();
+        int c = cost[node.first][node.second];
+        q.pop();
+        /*
+        we have three directions from here
+        1- forword
+        2- backword 
+        3- go to other direction with k moves forword
+        note=> we have to break to avoid the cycle
+        */
+        // forword
+        if(valid(node.first + 1, node.second, c)){
+            cost[node.first+ 1][node.second] = c + 1;
+            q.push({node.first+ 1, node.second});
+        }
+        // backword
+        if(valid(node.first - 1, node.second, c)){
+            cost[node.first - 1][node.second] = c + 1;
+            q.push({node.first - 1, node.second});
+        }
+        // to other direction
+        if(valid(node.first + k, node.second^1, c)){
+            cost[node.first + k][node.second^1] = c + 1;
+            q.push({node.first + k, node.second^1});
+        }
+
+    }
+}
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    cin >> n >> k;
+    cin >> sl >> sr;
+
+    // bulid the adj and the cost using bfs => 
+    bfs();
+    cout << (ans == -1 ? "NO" : "YES");
+    return 0;
+}
+/*
+maybe the shortest path is not valid but that is other path which is valid
+can I solve such a porblem
+NO
+can I solve it this way if the solution is the shortest path
+YES
+let try
+
+*/
