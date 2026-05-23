@@ -1,0 +1,36 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-05-23 21:29:00
+// Problem Name: C_Brr_Brrr_Patapim
+// Note        : يعم انجز عليااااا امتحان بكره
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        n*=2;
+        bool vis[n+5];
+        int arr[n+1];
+        for(int i = 1 ;i <= n/2;i++){
+            for(int j = 1 ; j <= n/2; j++){
+                int num; cin >> num;
+                arr[i+j] =num;
+                vis[num]=1;
+            }
+        }
+        for(int i =1; i <= n ;i++){
+            if(!vis[i]){
+                cout << i << " ";
+                break;
+            }
+        }
+        for(int i = 2; i <= n;i++) cout << arr[i] << " ";
+        cout << '\n';
+    }
+    return 0;
+}
