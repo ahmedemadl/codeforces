@@ -1,0 +1,26 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-05-24 20:48:58
+// Problem Name: B_Bobritto_Bandito
+// Note        :  ولا اي فكر كله هبد فالبطيخ مسأله ملهاش لازمه
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n, m, l,r;cin >> n >> m >> l >> r;
+        int l1= l;
+        int r1 = l+m;
+        while(r1+1 <= r && abs(l1) > abs(r1)){
+            r1++;
+            l1++;
+        }
+        cout << l1 <<" " << r1 << '\n';
+
+    }
+    return 0;
+}
