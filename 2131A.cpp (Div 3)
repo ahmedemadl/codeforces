@@ -1,0 +1,28 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-05-26 22:54:44
+// Problem Name: A_Lever
+// Note        : you don't have to undstand an easy problem to solve it 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        vector<int> a(n),b(n);
+        for(auto &i : a) cin >> i;
+        for(auto &i : b) cin >> i;
+        ll count = 0;
+        for(int i = 0 ;i < n; i++){
+            if(a[i] > b[i]){
+                count += (a[i] - b[i]);
+            }
+        }
+        cout << count + 1 << '\n';
+    }
+    return 0;
+}
