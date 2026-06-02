@@ -1,0 +1,43 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-03-06 07:12:40
+// Problem Name: D_Tung_Tung_Sahur
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        string s, g;cin >> s >> g;
+        int pt1=0, pt2=0;
+        string ans = "YES\n";
+        while(pt1 < s.size() && pt2 < g.size()){
+            if(s[pt1] != g[pt2]){
+                ans= "NO\n";
+                break;
+            }else{
+                int n1=1, n2=1;
+                // cal the size of the segment 
+                while(pt1 + 1 < (size_t)s.size() && s[pt1+1] == s[pt1]){
+                    n1++; pt1++;
+                }
+                while(pt2 + 1 < (size_t)g.size() && g[pt2+1] == g[pt2]){
+                    n2++; pt2++;
+                }
+                if(n1 > n2 ||  n2 > 2*n1 ){
+                    ans = "NO\n";
+                    break;
+                }
+                pt1++;
+                pt2++;
+            }
+        }
+        if(pt1 != s.size() || pt2 != g.size()) ans= "NO\n";
+        cout << ans ;
+    }
+    return 0;
+}
