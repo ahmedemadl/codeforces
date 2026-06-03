@@ -1,0 +1,95 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-06-02 22:30:28
+// Problem Name: G_It_is_all_about_wisdom
+// Note        : انت انسان تافه اه والله لما يكون حاجه من اساسيات المسأله وانت مش شايف عيب عييييييب
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int N = 1e5 + 1;
+vector<pair<ll,pair<ll,ll>>> adj[N];
+int n, m, k;
+// x is assumed wisdom
+bool dijkstra(int x){
+    // to sort in a inceasing order
+    // first for cost and sec for node
+    priority_queue< pair<ll,ll>, vector<pair<ll,ll>>, greater<pair<ll,ll>> > q;
+    vector<ll> cost((n + 1), 1e18); // node and cost
+    vector<bool> vis(n + 1);
+    cost[1] = 0;
+    q.push({0,1});
+    bool valid = 0;
+    while(!q.empty()){
+        int node = q.top().second;
+        q.pop();
+        if(node == n){
+            valid = true;
+            break;
+        }
+        if(vis[node]) continue;
+        vis[node] = true;
+        for(auto child : adj[node]){
+            if( cost[child.first] > cost[node] + child.second.first && cost[node] + child.second.first < k && child.second.second <= x){
+                cost[child.first] = cost[node] + child.second.first;    
+                q.push({ cost[child.first] , child.first });
+            }
+        }
+    }
+    return cost[n] != 1e18;
+}
+
+
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        cin >> n >> m >> k;
+        // data processing
+        for(int i = 0 ;i < m; i++){
+            // nodes: a -> b 
+            // c: cost
+            // w: wisdom
+            ll a, b,c, w;cin >> a >> b >> c >> w;
+            adj[a].push_back({b, {c, w}});
+            adj[b].push_back({a, {c, w}});
+        }
+        // binary search on x
+        // want to minimize
+        ll r= 1e9+1, l = 1, mid, ans=-1;
+        while(l <= r){
+            int mid = l + (r -l)/2;
+            if(dijkstra(mid)){
+                ans = mid;
+                r = mid -1;
+            }else{
+                l = mid +1;
+            }
+        }
+
+        cout << ans << '\n';
+
+        // clear
+        for(int i = 1; i <= n; i++){
+            adj[i].clear();
+        }
+    }
+    return 0;
+}
+/*
+thinking 
+what data sturture to be uesed
+in a normal dijkstra we use vector<pair<int,pair<int,int>> adj[N]
+put in this problem we have the cost and k , it more confusing for sure
+but will do it anyway, to improve our skill  
+what is log 1e9 -> 30
+the time is O (T * log (W) * (V+E)* log(V))
+ = (30 * (1e10)log(1e5))
+ = 30 * 32 * 20 * 1e10 * 
+ = T * 1e3 * 1e10 = T 1e13
+
+ what is log 1e5 20
+
+
+*/
