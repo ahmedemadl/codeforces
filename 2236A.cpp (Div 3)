@@ -1,0 +1,22 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-06-13 23:40:42
+// Problem Name: A_Games_on_the_Train
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n;cin >> n;
+        vector<int> v(n);
+        for(int &i : v) cin >>i;
+        cout << *max_element(v.begin(),v.end()) - *min_element(v.begin(),v.end()) +1 << '\n';
+
+    }
+    return 0;
+}
