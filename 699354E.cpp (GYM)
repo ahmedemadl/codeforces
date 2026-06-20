@@ -1,0 +1,34 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-06-20 10:25:07
+// Problem Name: E_Not_Afraid_to_Fall
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+int const N = 5 * 1e5;
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int n, m;cin >> n >> m;
+    
+    vector<ll> prefix(N+2), v(n);
+    ll sum =0;
+    for(int i = 0 ;i < n; i++){
+        cin >> v[i];
+        sum += v[i];
+        prefix[v[i]] += v[i];
+    }
+    for(int i = 1 ;i <= N; i++){
+        prefix[i] += prefix[i-1];
+        // cout << prefix[i] << " ";
+    }
+    // cout << '\n';
+    for(int i = 1 ; i <= m; i++){
+        cout << sum - prefix[i-1] << " ";
+        // cout << sum << " " << prefix[i-1] << " ";
+        // cout << '\n';
+    }
+    return 0;
+}   
