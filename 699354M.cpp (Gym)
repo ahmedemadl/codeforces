@@ -1,0 +1,58 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-06-20 11:31:21
+// Problem Name: M_A_Colorful_Tree
+// Note        : maybe DFS
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+int const N = 1e5+1;
+vector<int> adj[N];
+vector<int> color;
+vector<int> cost(N + 1, 0);
+map<int,int> mp; // track the freq of each color
+
+int n;
+set<int> cur_color;
+// يارب 
+bool vis[N];
+void dfs(int node){
+    vis[node] =1;
+    mp[color[node]]++;
+    cur_color.insert(color[node]);
+    cost[node] = cur_color.size();
+
+    for(int child : adj[node]){
+        if(!vis[child]){
+            dfs(child);
+        }
+    }
+    mp[color[node]]--;
+    if(mp[color[node]] == 0){
+        int remove = color[node];
+        cur_color.erase(remove);
+    }
+}
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int q;cin >> n >> q;
+    color.resize(n+1);
+    for(int i = 1 ;i <= n;i++){
+        cin >> color[i];
+    }
+    for(int i = 0; i < n - 1; i++){
+        int a, b;cin >> a>> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    // I will give a cost for each color
+    // bfs(0);
+    dfs(1);
+    while(q--){
+        int node; cin >> node;
+        cout << cost[node] << '\n';
+    }
+    return 0;
+}
