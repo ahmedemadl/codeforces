@@ -1,0 +1,21 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-06-23 10:01:04
+// Problem Name: A_Colors
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    set<char> st;
+    while(t--){
+        string s;cin >> s;
+        st.insert(s[0]);
+    }   
+    cout << st.size();
+    return 0;
+}
