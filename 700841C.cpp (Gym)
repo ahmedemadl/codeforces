@@ -1,0 +1,35 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-06-27 10:07:58
+// Problem Name: C_Zero_is_not_an_option
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int t; cin >> t;
+    while(t--){
+        int n, m;cin >> n  >> m;
+        ll arr[n][m];
+        ll v[n]={0};
+        for(int i = 0 ;i < n;i++){
+            for(int j = 0 ;j < m; j++){
+                cin >> arr[i][j];
+                v[i]|= arr[i][j];
+            }
+        }
+        for(int i = 1 ;i < n;i++){
+            v[i]&= v[i-1];
+        }
+
+        if(v[n-1]){
+            cout <<"YES\n";
+        }else{
+            cout <<"NO\n";
+        }
+    }
+    return 0;
+}
