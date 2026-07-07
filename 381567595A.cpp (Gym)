@@ -1,0 +1,17 @@
+//=====================================================
+// Author      : ahmedgbr367
+// Date        : 2026-07-07 10:01:23
+// Problem Name: A_Brachiosaurus
+// Note        : 
+//=====================================================
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    cin.tie(0)->sync_with_stdio(0);
+    int h, a, b;cin >> h >> a >> b;
+    if(h >= a && h <= b) cout <<"SIM";
+    else cout << "NAO";
+    return 0;
+}
